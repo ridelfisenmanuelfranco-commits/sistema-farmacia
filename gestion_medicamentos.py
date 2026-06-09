@@ -479,40 +479,39 @@ def eliminar_medicamento():
         print('\nNo hay medicamentos registrados.\n')
 
 # =======================================================================================
-#                                   SISTEMA PRINCIPAL                     
-# =======================================================================================     
-while True:
-    mostrar_menu()
+#                               MENU DE MEDICAMENTOS
+# =======================================================================================
+def menu_medicamentos():
 
-    try:
-        opcion = int(input('Elija una opcion: '))
+    while True:
+        mostrar_menu()
 
-    except ValueError:
-        print('\nDato invalido.\n')
-        continue
+        try:
+            opcion = int(input('Elija una opcion: '))
 
-    if opcion == 1:
-        registrar_medicamento()
+        except ValueError:
+            print('\nDato invalido.\n')
+            continue
 
-    elif opcion == 2:
-        mostrar_medicamentos()
+        if opcion == 1:
+            registrar_medicamento()
 
-    elif opcion == 3:
-        buscar_medicamento()
+        elif opcion == 2:
+            mostrar_medicamentos()
 
-    elif opcion == 4:
-        actualizar_medicamento()
+        elif opcion == 3:
+            buscar_medicamento()
 
-    elif opcion == 5:
-        eliminar_medicamento()
+        elif opcion == 4:
+            actualizar_medicamento()
 
-    elif opcion == 6:
-        print('\nVolver.\n')
-        break
+        elif opcion == 5:
+            eliminar_medicamento()
 
-    else:
-        print('\nOpcion invalida.\n')
+        elif opcion == 6:
+            print('\nVolviendo al menu principal.\n')
+            break
 
-# la opcion 7 es volver pero por el momento la dejare con el break de salir hasta que 
-# terminemos de realizar el programa.
-# -----------------------------------------------------------------------------------------------
+        else:
+            print('\nOpcion invalida.\n')
+
