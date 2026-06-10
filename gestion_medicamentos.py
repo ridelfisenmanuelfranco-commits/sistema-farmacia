@@ -1,7 +1,7 @@
 # =======================================================================================
 #                               SISTEMA DE GESTION DE FARMACIA
 # =======================================================================================
-
+from gestion_proveedores import proveedores
 # =======================================================================================
 #                                       DATOS
 # =======================================================================================
@@ -54,30 +54,25 @@ def mostrar_categorias():
 #                                    OPCIONES PROVEEDOR  
 # =======================================================================================
 def mostrar_proveedores():
-    print("""
-    ====================================
-                PROVEEDORES
-    ====================================
+    if proveedores:
 
-    1. Farmaceutica Nacional
-    2. Laboratorios ABC
-    3. Distribuidora Medica
-    4. Farma Express
-    0. Otro
-    ====================================
-    """)
+        for i, proveedor in enumerate(proveedores):
+            print(f'{i + 1}. {proveedor["Nombre"]}')
+
+    else:
+        print('\nNo hay proveedores registrados.\n')
 
 
 # =======================================================================================
 #                               OBTENER CODIGO DEL MEDICAMENTO   
 # =======================================================================================
 def obtener_codigo_medicamento():
-        global contador_medicamentos
+    global contador_medicamentos
 
-        codigo_medicamento = f'MED-{contador_medicamentos:03}'
-        contador_medicamentos += 1
+    codigo_medicamento = f'MED-{contador_medicamentos:03}'
+    contador_medicamentos += 1
 
-        return codigo_medicamento
+    return codigo_medicamento
 
 
 # =======================================================================================
@@ -216,33 +211,25 @@ def obtener_stock_minimo_medicamento():
 #                       OBTENER PROVEEDOR DEL MEDICAMENTO 
 # =======================================================================================
 def obtener_proveedor_medicamento():
+    if not proveedores:
+        print('\nNo hay proveedores registrados.\n')
+        return None
+    
     while True:
-        
+
         mostrar_proveedores()
 
         try:
-            proveedor = int(input('Elija el proveedor: '))
+            opcion = int(input('Elija el proveedor: '))
 
         except ValueError:
             print('\nDato invalido.\n')
             continue
 
-        if proveedor == 1:
-            return "Farmaceutica Nacional"
-        
-        elif proveedor == 2:
-            return "Laboratorios ABC"
-        
-        elif proveedor == 3:
-            return "Distribuidora Medica"
-        
-        elif proveedor == 4:
-            return "Farma Express"
-        
-        elif proveedor == 0:
-            return "Otro"
-        else:
-            print('\nProveedor invalido\n')
+        if 1 <= opcion <= len(proveedores):
+            return proveedores[opcion - 1]['Nombre']
+
+        print('\nProveedor invalido.\n')
 
 
 
@@ -314,7 +301,9 @@ def registrar_medicamento():
         return
     
     proveedor_medicamento = obtener_proveedor_medicamento()
-
+    if proveedor_medicamento is None:
+        return
+    
     medicamento = crear_medicamento(
         codigo_medicamento,
         nombre_medicamento,

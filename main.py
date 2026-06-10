@@ -6,7 +6,7 @@ print
 #                               FUNCIONES A IMPORTAR
 # ============================================================================================
 from gestion_medicamentos import menu_medicamentos
-
+from gestion_proveedores import menu_proveedores
 
 # ============================================================================================
 #                               MENU PRINCIPAL DEL SISTEMA
@@ -45,6 +45,9 @@ while True:
 
     if opcion == 1:
         menu_medicamentos()
+    
+    elif opcion == 2:
+        menu_proveedores()
 
     elif opcion == 7:
         print('\nSaliendo del sistema.\n')
