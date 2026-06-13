@@ -63,9 +63,10 @@ def obtener_telefono_empresa():
     while True:
         
         telefono_empresa = input('Telefono de la empresa: ').strip()
-        
-    
 
+        if not telefono_empresa.isdigit():
+            print('\nTelefono invalido.\n')
+            continue
 
         if len(str(telefono_empresa)) != 10:
             print('\nNumero de telefono invalido.\n')
@@ -137,13 +138,6 @@ def crear_proveedor(codigo, nombre, telefono, correo, direccion, ciudad):
         'Ciudad': ciudad
     }
 
-
-# ==============================================================================================
-#                                       AGREGAR PROVEEDOR
-# ==============================================================================================
-def agregar_proveedor(proveedor):
-    proveedores.append(proveedor)
-
 # ==============================================================================================
 #                                       REGISTRAR PROVEEDOR
 # ==============================================================================================
@@ -177,7 +171,7 @@ def registrar_proveedor():
                                 ciudad_empresa
                                 )
 
-    agregar_proveedor(proveedor)
+    proveedores.append(proveedor)
     print('\nProveedor agregado correctamente.\n')
 
 # ==============================================================================================

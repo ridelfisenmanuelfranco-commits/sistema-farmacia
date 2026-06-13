@@ -179,13 +179,6 @@ def crear_empleado(codigo_empleado, nombre_empleado, cargo_empleado, telefono_em
     }
 
 # ================================================================================================
-#                                       AGREGAR EMPLEADO 
-# ================================================================================================
-def agregar_empleado(empleado):
-    empleados.append(empleado)
-
-
-# ================================================================================================
 #                                      REGISTRAR EMPLEADO
 # ================================================================================================
 def registrar_empleado():
@@ -228,7 +221,7 @@ def registrar_empleado():
                               correo_empleado,
                               salario_empleado)
     
-    agregar_empleado(empleado)
+    empleados.append(empleado)
 
     print('\nEmpleado agregado correctamente.\n')
 

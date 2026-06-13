@@ -10,6 +10,7 @@ from gestion_medicamentos import menu_medicamentos
 from gestion_proveedores import menu_proveedores
 from gestion_empleado import menu_empleados
 from gestion_cliente import menu_clientes
+from gestion_ventas import menu_ventas
 # ============================================================================================
 #                               MENU PRINCIPAL DEL SISTEMA
 # ============================================================================================
@@ -46,7 +47,7 @@ while True:
         continue
 
     limpiar_consola()
-    
+
     if opcion == 1:
         menu_medicamentos()
     
@@ -58,6 +59,9 @@ while True:
 
     elif opcion == 4:
         menu_clientes()
+    
+    elif opcion == 5:
+        menu_ventas()
         
     elif opcion == 7:
         print('\nSaliendo del sistema.\n')

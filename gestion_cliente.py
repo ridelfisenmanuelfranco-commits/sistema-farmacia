@@ -89,13 +89,6 @@ def crear_cliente(codigo_cliente, nombre_cliente, telefono_cliente):
 
 
 # =======================================================================================
-#                                   AGREGAR CLIENTE
-# =======================================================================================
-def agregar_cliente(cliente):
-    clientes.append(cliente)
-
-
-# =======================================================================================
 #                                   REGISTRAR CLIENTE
 # =======================================================================================
 def registrar_cliente():
@@ -126,7 +119,7 @@ def registrar_cliente():
                             nombre_cliente,
                             telefono_cliente)
 
-    agregar_cliente(cliente)
+    clientes.append(cliente)
 
     print('\nCliente registrado exitosamente.\n')
 

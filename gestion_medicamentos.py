@@ -1,5 +1,5 @@
 # =======================================================================================
-#                               SISTEMA DE GESTION DE FARMACIA
+#                                GESTION DE MEDICAMENTO
 # =======================================================================================
 from utilidades import limpiar_consola
 from gestion_proveedores import proveedores
@@ -256,13 +256,7 @@ def crear_medicamento(codigo,
         "Stock_Minimo": stock_minimo,
         "Proveedor": proveedor
     }
-
-
-# =======================================================================================
-#                              AGREGAR MEDICAMENTO                    
-# =======================================================================================
-def agregar_medicamento(medicamento):
-    medicamentos.append(medicamento)
+    
 
 # ----------------------------------------------------------------------------------------------
 # =======================================================================================
@@ -316,7 +310,7 @@ def registrar_medicamento():
         proveedor_medicamento
         )
     
-    agregar_medicamento(medicamento)
+    medicamentos.append(medicamento)
     print('\nMedicamento agregado correctamente.\n')
 # =======================================================================================
 #                                   MOSTRAR MEDICAMENTOS
