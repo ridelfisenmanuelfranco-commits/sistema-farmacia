@@ -12,6 +12,7 @@ from gestion_empleado import menu_empleados
 from gestion_cliente import menu_clientes
 from gestion_ventas import menu_ventas
 from gestion_reportes import menu_reportes
+
 # ============================================================================================
 #                               MENU PRINCIPAL DEL SISTEMA
 # ============================================================================================
@@ -66,7 +67,7 @@ while True:
 
     elif opcion == 6:
         menu_reportes()
-        
+
     elif opcion == 7:
         print('\nSaliendo del sistema.\n')
         break

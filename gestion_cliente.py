@@ -2,11 +2,13 @@
 #                               GESTION DE CLIENTES
 # =======================================================================================
 from utilidades import limpiar_consola
+from persistencia import guardar_clientes
+from persistencia import cargar_clientes
 # =======================================================================================
 #                                       DATOS
 # =======================================================================================
-clientes = []
-contador_clientes = 1
+clientes = cargar_clientes()
+contador_clientes = len(clientes) + 1
 
 # =======================================================================================
 #                                MENU DEL SISTEMA
@@ -120,6 +122,7 @@ def registrar_cliente():
                             telefono_cliente)
 
     clientes.append(cliente)
+    guardar_clientes(clientes)
 
     print('\nCliente registrado exitosamente.\n')
 
@@ -206,6 +209,7 @@ def actualizar_cliente():
 
                 cliente['Telefono'] = obtener_telefono_cliente()
 
+                guardar_clientes(clientes)
                 print('\nCliente actualizado correctamente.\n')
                 break
 
@@ -242,7 +246,8 @@ def eliminar_cliente():
                 ''')
 
                 clientes.remove(cliente)
-
+                
+                guardar_clientes(clientes)
                 print('\nCliente eliminado correctamente.\n')
                 break
 

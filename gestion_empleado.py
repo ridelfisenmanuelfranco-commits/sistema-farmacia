@@ -2,11 +2,13 @@
 #                                       GESTION EMPLEADOS
 # ================================================================================================
 from utilidades import limpiar_consola
+from persistencia import guardar_empleados
+from persistencia import cargar_empleados
 # ================================================================================================
 #                                           DATOS
 # ================================================================================================
-empleados = []
-contador_empleados = 1
+empleados = cargar_empleados()
+contador_empleados = len(empleados) + 1
 
 # ================================================================================================
 #                                       MENU EMPLEADOS
@@ -222,6 +224,7 @@ def registrar_empleado():
                               salario_empleado)
     
     empleados.append(empleado)
+    guardar_empleados(empleados)
 
     print('\nEmpleado agregado correctamente.\n')
 
@@ -322,6 +325,7 @@ def actualizar_empleado():
                 empleado['Correo'] = obtener_correo_empleado()
                 empleado['Salario'] = obtener_salario_empleado()
 
+                guardar_empleados(empleados)
                 print('\nEmpleado actualizado correctamente.\n')
                 break
 
@@ -363,7 +367,8 @@ def eliminar_empleado():
                 =============================================
                 ''')
                 empleados.remove(empleado)
-
+                
+                guardar_empleados(empleados)
                 print('\nEmpleado eliminado correctamente.\n')
                 break
 

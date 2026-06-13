@@ -5,12 +5,15 @@ from utilidades import limpiar_consola
 from gestion_cliente import clientes
 from gestion_empleado import empleados
 from gestion_medicamentos import medicamentos
+from persistencia import guardar_ventas
+from persistencia import  cargar_ventas
+from persistencia import guardar_medicamentos
 
 # =======================================================================================
 #                                           DATOS
 # =======================================================================================
-ventas = []
-contador_ventas = 1
+ventas = cargar_ventas()
+contador_ventas = len(ventas) + 1
 
 # =======================================================================================
 #                                      MENU DE VENTAS
@@ -202,7 +205,8 @@ def registrar_venta():
     ventas.append(venta)
 
     medicamento_venta['Stock'] -= cantidad_a_vender
-
+    guardar_medicamentos(medicamentos)
+    guardar_ventas(ventas)
     print('\nVenta realizada correctamente.\n')
 
 
@@ -302,6 +306,7 @@ def eliminar_venta():
                 ====================================
                 ''')
                 ventas.remove(venta)
+                guardar_ventas(ventas)
                 print('\nVenta eliminada correctamente.\n')
                 break
 

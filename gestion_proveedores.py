@@ -3,12 +3,14 @@
 # ===============================================================================================
 
 from utilidades import limpiar_consola
+from persistencia import guardar_proveedores
+from persistencia import cargar_proveedores
 
 # ===============================================================================================
 #                                          DATOS
 # ===============================================================================================
-proveedores = []
-contador_proveedores = 1
+proveedores = cargar_proveedores()
+contador_proveedores = len(proveedores) + 1
 
 # ===============================================================================================
 #                                       MENU DE PROVEEDORES
@@ -172,6 +174,7 @@ def registrar_proveedor():
                                 )
 
     proveedores.append(proveedor)
+    guardar_proveedores(proveedores)
     print('\nProveedor agregado correctamente.\n')
 
 # ==============================================================================================
@@ -263,6 +266,7 @@ def actualizar_proveedor():
                 proveedor['Direccion'] = obtener_direccion_empresa()
                 proveedor['Ciudad'] = obtener_ciudad_empresa()
 
+                guardar_proveedores(proveedores)
                 print('\nProveedor actualizado correctamente.\n')
                 break
         if not encontrado:
@@ -298,6 +302,7 @@ def eliminar_proveedor():
                 ''')
 
                 proveedores.remove(proveedor)
+                guardar_proveedores(proveedores)
                 print('\nProveedor eliminado correctamente.\n')
                 break
                 

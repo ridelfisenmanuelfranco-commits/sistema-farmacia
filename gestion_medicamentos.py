@@ -3,11 +3,13 @@
 # =======================================================================================
 from utilidades import limpiar_consola
 from gestion_proveedores import proveedores
+from persistencia import guardar_medicamentos
+from persistencia import cargar_medicamentos
 # =======================================================================================
 #                                       DATOS
 # =======================================================================================
-medicamentos = []
-contador_medicamentos = 1
+medicamentos = cargar_medicamentos()
+contador_medicamentos = len(medicamentos) + 1
 
 # =======================================================================================
 #                                MENU DEL SISTEMA
@@ -311,6 +313,7 @@ def registrar_medicamento():
         )
     
     medicamentos.append(medicamento)
+    guardar_medicamentos(medicamentos)
     print('\nMedicamento agregado correctamente.\n')
 # =======================================================================================
 #                                   MOSTRAR MEDICAMENTOS
@@ -418,6 +421,7 @@ def actualizar_medicamento():
                 
                 medicamento['Proveedor'] = obtener_proveedor_medicamento()
                 
+                guardar_medicamentos(medicamentos)
                 print('\nMedicamento actualizado correctamente.\n')
                 break
         if not encontrado:
@@ -454,6 +458,7 @@ def eliminar_medicamento():
                 ''')
 
                 medicamentos.remove(medicamento)
+                guardar_medicamentos(medicamentos)
                 print('\nMedicamento eliminado correctamente.\n')
                 break
         if not encontrado:
