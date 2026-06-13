@@ -7,6 +7,7 @@ print
 # ============================================================================================
 from gestion_medicamentos import menu_medicamentos
 from gestion_proveedores import menu_proveedores
+from gestion_empleado import menu_empleados
 
 # ============================================================================================
 #                               MENU PRINCIPAL DEL SISTEMA
@@ -48,6 +49,9 @@ while True:
     
     elif opcion == 2:
         menu_proveedores()
+
+    elif opcion == 3:
+        menu_empleados()
 
     elif opcion == 7:
         print('\nSaliendo del sistema.\n')

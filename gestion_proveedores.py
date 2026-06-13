@@ -158,6 +158,7 @@ def registrar_proveedor():
         if proveedor['Nombre'] == nombre_empresa:
             existe = True
             break
+
     if existe:
         print('\nEl proveedor ya existe.\n')
         return
@@ -303,7 +304,8 @@ def eliminar_proveedor():
 
                 proveedores.remove(proveedor)
                 print('\nProveedor eliminado correctamente.\n')
-                break
+                
+                
         if not encontrado:
             print('\nProveedor no encontrado.\n')
     
@@ -341,7 +343,7 @@ def menu_proveedores():
             eliminar_proveedor()
 
         elif opcion == 6:
-            print('\nSaliendo del sistena.\n')
+            print('\nVolviendo al menu principal.\n')
             break
         else:
             print('\nOpcion invalida.\n')
