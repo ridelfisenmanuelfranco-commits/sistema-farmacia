@@ -1,10 +1,11 @@
 # ============================================================================================
 #                               SISTEMA DE GESTION DE FARMACIA
 # ============================================================================================
-print
+
 # ============================================================================================
 #                               FUNCIONES A IMPORTAR
 # ============================================================================================
+from utilidades import limpiar_consola
 from gestion_medicamentos import menu_medicamentos
 from gestion_proveedores import menu_proveedores
 from gestion_empleado import menu_empleados
@@ -34,7 +35,7 @@ def mostrar_menu_principal():
 #                               SISTEMA PRINCIPAL
 # ============================================================================================
 while True:
-
+    
     mostrar_menu_principal()
 
     try:
@@ -44,6 +45,8 @@ while True:
         print('\nDato invalido.\n')
         continue
 
+    limpiar_consola()
+    
     if opcion == 1:
         menu_medicamentos()
     

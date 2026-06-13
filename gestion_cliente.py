@@ -1,7 +1,7 @@
 # =======================================================================================
 #                               GESTION DE CLIENTES
 # =======================================================================================
-
+from utilidades import limpiar_consola
 # =======================================================================================
 #                                       DATOS
 # =======================================================================================
@@ -146,6 +146,9 @@ def mostrar_clientes():
             Telefono    : {cliente['Telefono']}
             =========================================
             ''')
+
+        print(f'\nTotal de clientes: {len(clientes)}\n')
+        
     else:
         print('\nNo hay clientes registrados')
 
@@ -269,6 +272,8 @@ def menu_clientes():
         except ValueError:
             print('\nDato invalido.\n')
             continue
+        
+        limpiar_consola()
 
         if opcion == 1:
             registrar_cliente()

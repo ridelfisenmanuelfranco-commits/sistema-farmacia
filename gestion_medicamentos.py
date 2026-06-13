@@ -1,6 +1,7 @@
 # =======================================================================================
 #                               SISTEMA DE GESTION DE FARMACIA
 # =======================================================================================
+from utilidades import limpiar_consola
 from gestion_proveedores import proveedores
 # =======================================================================================
 #                                       DATOS
@@ -481,6 +482,8 @@ def menu_medicamentos():
         except ValueError:
             print('\nDato invalido.\n')
             continue
+        
+        limpiar_consola()
 
         if opcion == 1:
             registrar_medicamento()

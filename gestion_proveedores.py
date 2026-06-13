@@ -2,6 +2,7 @@
 #                                       GESTION DE PROVEEDORES
 # ===============================================================================================
 
+from utilidades import limpiar_consola
 
 # ===============================================================================================
 #                                          DATOS
@@ -304,7 +305,7 @@ def eliminar_proveedor():
 
                 proveedores.remove(proveedor)
                 print('\nProveedor eliminado correctamente.\n')
-                
+                break
                 
         if not encontrado:
             print('\nProveedor no encontrado.\n')
@@ -326,6 +327,8 @@ def menu_proveedores():
         except ValueError:
             print('\nDato invalido.\n')
             continue
+        
+        limpiar_consola()
 
         if opcion == 1:
             registrar_proveedor()
