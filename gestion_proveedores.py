@@ -261,8 +261,41 @@ def actualizar_proveedor():
                 ========================================
                 ''')
 
-                proveedor['Telefono'] = obtener_telefono_empresa()
-                proveedor['Correo'] = obtener_correo_empresa()
+                # ----------------------------------
+                #         VERIFICAR TELEFONO
+                # ----------------------------------
+                nuevo_telefono = obtener_telefono_empresa()
+
+                proveedor_existe = False
+                for otro_proveedor in proveedores:
+                    if (otro_proveedor['Codigo'] != proveedor['Codigo'] 
+                        and otro_proveedor['Telefono'] == nuevo_telefono):
+                        proveedor_existe = True
+                        break
+                if proveedor_existe:
+                    print('\nEl proveedor ya existe.\n')
+                    return
+            
+                proveedor['Telefono'] = nuevo_telefono
+
+
+                # ----------------------------------
+                #         VERIFICAR CORREO
+                # ----------------------------------
+                nuevo_correo = obtener_correo_empresa()
+                correo_existe = False
+                for otro_proveedor in proveedores:
+                    if (otro_proveedor['Codigo'] != proveedor['Codigo'] 
+                        and otro_proveedor['Correo'] == nuevo_correo):
+                        correo_existe = True
+                        break
+
+                if correo_existe:
+                    print('\nEl correo ya existe.\n')
+                    return
+                
+                proveedor['Correo'] = nuevo_correo
+
                 proveedor['Direccion'] = obtener_direccion_empresa()
                 proveedor['Ciudad'] = obtener_ciudad_empresa()
 

@@ -1,0 +1,17 @@
+[
+    {
+        "Codigo": "CLI-001",
+        "Nombre": "Juan Perez",
+        "Telefono": "(809) 111 1111"
+    },
+    {
+        "Codigo": "CLI-002",
+        "Nombre": "Maria Rodriguez",
+        "Telefono": "(809) 222 2222"
+    },
+    {
+        "Codigo": "CLI-003",
+        "Nombre": "Carlos Martinez",
+        "Telefono": "(809) 333 3333"
+    }
+]

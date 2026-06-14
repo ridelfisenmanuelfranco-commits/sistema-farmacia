@@ -1,0 +1,18 @@
+[
+    {
+        "Codigo": "EMP-001",
+        "Nombre": "Pedro Gomez",
+        "Cargo": "Farmacéutico",
+        "Telefono": "(829) 111 1111",
+        "Correo": "pedro@farmacia.com",
+        "Salario": 35000.0
+    },
+    {
+        "Codigo": "EMP-002",
+        "Nombre": "Laura Castillo",
+        "Cargo": "Cajero",
+        "Telefono": "(829) 222 2222",
+        "Correo": "laura@farmacia.com",
+        "Salario": 25000.0
+    }
+]

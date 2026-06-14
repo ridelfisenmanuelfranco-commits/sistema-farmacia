@@ -1,0 +1,26 @@
+[
+    {
+        "Codigo": "PRO-001",
+        "Nombre": "Laboratorios Caribe",
+        "Telefono": "(809) 555 1001",
+        "Correo": "ventas@caribe.com",
+        "Direccion": "Av. 27 De Febrero",
+        "Ciudad": "Santo Domingo"
+    },
+    {
+        "Codigo": "PRO-002",
+        "Nombre": "Distribuidora Medica Caribe",
+        "Telefono": "(809) 555 1002",
+        "Correo": "ventas@medcaribe.com",
+        "Direccion": "Calle Duarte",
+        "Ciudad": "Santiago"
+    },
+    {
+        "Codigo": "PRO-003",
+        "Nombre": "Laboratorio Antillanos",
+        "Telefono": "(809) 555 1003",
+        "Correo": "info@antillanos.com",
+        "Direccion": "Av. Las Carreras",
+        "Ciudad": "Santiago"
+    }
+]

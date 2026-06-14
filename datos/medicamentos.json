@@ -1,1 +1,32 @@
-[]
+[
+    {
+        "Codigo": "MED-001",
+        "Nombre": "Acetaminofen 500Mg",
+        "Categoria": "Analgésicos",
+        "Precio_Compra": 8.0,
+        "Precio_Venta": 15.0,
+        "Stock": 115,
+        "Stock_Minimo": 20,
+        "Proveedor": "Laboratorios Caribe"
+    },
+    {
+        "Codigo": "MED-002",
+        "Nombre": "Ibuprofeno 400Mg",
+        "Categoria": "Antiinflamatorios",
+        "Precio_Compra": 12.0,
+        "Precio_Venta": 22.0,
+        "Stock": 88,
+        "Stock_Minimo": 15,
+        "Proveedor": "Distribuidora Medica Caribe"
+    },
+    {
+        "Codigo": "MED-003",
+        "Nombre": "Amoxicilina 500Mg",
+        "Categoria": "Antibióticos",
+        "Precio_Compra": 18.0,
+        "Precio_Venta": 35.0,
+        "Stock": 70,
+        "Stock_Minimo": 10,
+        "Proveedor": "Laboratorio Antillanos"
+    }
+]

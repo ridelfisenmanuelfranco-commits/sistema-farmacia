@@ -56,7 +56,6 @@ def obtener_codigo_empleado():
 
     return codigo_empleado
 
-
 # ================================================================================================
 #                               OBTENER NOMBRE DEL EMPLEADO        
 # ================================================================================================
@@ -321,7 +320,38 @@ def actualizar_empleado():
                 =============================================
                 ''')
                 empleado['Cargo'] = obtener_cargo_empleado()
-                empleado['Telefono'] = obtener_telefono_empleado()
+
+                # ----------------------------------
+                #         VERIFICAR TELEFONO
+                # ----------------------------------
+                nuevo_telefono = obtener_telefono_empleado()
+
+                telefono_existe = False
+                for otro_empleado in empleados:
+                    if (otro_empleado['Codigo'] != empleado['Codigo'] 
+                        and otro_empleado['Telefono'] == empleado['Telefono']):
+                        telefono_existe = True
+                        break
+                if telefono_existe:
+                    print('\nEl telefono ya existe.\n')
+                    return
+                
+                empleado['Telefono'] = nuevo_telefono
+                # ----------------------------------
+                #         VERIFICAR CORREO
+                # ----------------------------------
+                nuevo_correo = obtener_correo_empleado()
+                correo_existe = False
+                for otro_empleado in empleados:
+                    if (otro_empleado['Codigo'] != empleado['Codigo'] 
+                        and otro_empleado['Correo'] == empleado['Correo']):
+                        correo_existe = True
+                        break
+
+                if correo_existe:
+                    print('\nEl correo ya existe.\n')
+                    return
+                
                 empleado['Correo'] = obtener_correo_empleado()
                 empleado['Salario'] = obtener_salario_empleado()
 

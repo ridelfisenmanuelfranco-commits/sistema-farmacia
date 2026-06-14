@@ -1,0 +1,20 @@
+[
+    {
+        "Codigo": "VEN-001",
+        "Cliente": "Juan Perez",
+        "Empleado": "Laura Castillo",
+        "Medicamento": "Ibuprofeno 400Mg",
+        "Cantidad": 2,
+        "Precio_Unitario": 22.0,
+        "Total": 44.0
+    },
+    {
+        "Codigo": "VEN-002",
+        "Cliente": "Maria Rodriguez",
+        "Empleado": "Pedro Gomez",
+        "Medicamento": "Acetaminofen 500Mg",
+        "Cantidad": 5,
+        "Precio_Unitario": 15.0,
+        "Total": 75.0
+    }
+]
