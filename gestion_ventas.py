@@ -209,14 +209,11 @@ def registrar_venta():
     guardar_ventas(ventas)
     print('\nVenta realizada correctamente.\n')
 
-
 # =======================================================================================
-#                                      MOSTRAR VENTAS
+#                                      MOSTRAR VENTA
 # =======================================================================================
-def mostrar_ventas():
-    if ventas:
-        for i, venta in enumerate(ventas):
-            print(f'''
+def mostrar_venta(i, venta):
+    print(f'''
             {i + 1}
             ====================================
                             VENTA
@@ -230,6 +227,13 @@ def mostrar_ventas():
             Total             : RD${venta['Total']:.2f}
             ====================================
             ''')
+# =======================================================================================
+#                                      MOSTRAR VENTAS
+# =======================================================================================
+def mostrar_ventas():
+    if ventas:
+        for i, venta in enumerate(ventas):
+            mostrar_venta(i, venta)
 
         print(f'\nTotal de ventas: {len(ventas)}\n')
 
@@ -253,20 +257,7 @@ def buscar_venta():
             if venta['Codigo'] == codigo_venta_buscado:
                 encontrado = True
                 print('\nVenta encontrada.\n')
-                print(f'''
-                {i + 1}
-                ====================================
-                                VENTA
-                ====================================
-                Codigo            : {venta['Codigo']}
-                Cliente           : {venta['Cliente']}
-                Empleado          : {venta['Empleado']}
-                Medicamento       : {venta['Medicamento']}
-                Cantidad          : {venta['Cantidad']}
-                Precio Unitario   : RD${venta['Precio_Unitario']:.2f}
-                Total             : RD${venta['Total']:.2f}
-                ====================================
-                ''')
+                mostrar_venta(i, venta)
                 break
 
         if not encontrado:
@@ -291,20 +282,7 @@ def eliminar_venta():
             if venta['Codigo'] == codigo_venta_buscado:
                 encontrado = True
                 print('\nVenta encontrada.\n')
-                print(f'''
-                {i + 1}
-                ====================================
-                                VENTA
-                ====================================
-                Codigo            : {venta['Codigo']}
-                Cliente           : {venta['Cliente']}
-                Empleado          : {venta['Empleado']}
-                Medicamento       : {venta['Medicamento']}
-                Cantidad          : {venta['Cantidad']}
-                Precio Unitario   : RD${venta['Precio_Unitario']:.2f}
-                Total             : RD${venta['Total']:.2f}
-                ====================================
-                ''')
+                mostrar_venta(i, venta)
                 ventas.remove(venta)
                 guardar_ventas(ventas)
                 print('\nVenta eliminada correctamente.\n')
