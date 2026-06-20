@@ -227,14 +227,11 @@ def registrar_empleado():
 
     print('\nEmpleado agregado correctamente.\n')
 
-
 # ================================================================================================
-#                                       MOSTRAR LOS EMPLEADOS       
+#                                       MOSTRAR EMPLEADO     
 # ================================================================================================
-def mostrar_empleados():
-    if empleados:
-        for i, empleado in enumerate(empleados):
-            print(f'''
+def mostrar_empleado(i, empleado):
+    print(f'''
             =============================================
             {i + 1}   EMPLEADO
             =============================================
@@ -246,6 +243,13 @@ def mostrar_empleados():
             Salario    : RD${empleado['Salario']:.2f}
             =============================================
             ''')
+# ================================================================================================
+#                                       MOSTRAR LOS EMPLEADOS       
+# ================================================================================================
+def mostrar_empleados():
+    if empleados:
+        for i, empleado in enumerate(empleados):
+            mostrar_empleado(i, empleado)
         print(f'\nTotal de empleados: {len(empleados)}\n')
 
     else:
@@ -269,18 +273,7 @@ def buscar_empleado():
                 
                 encontrado = True
                 print('\nEmpleado encontrado.\n')
-                print(f'''
-                =============================================
-                {i + 1}   EMPLEADO
-                =============================================
-                Codigo     : {empleado['Codigo']}
-                Nombre     : {empleado['Nombre']}
-                Cargo      : {empleado['Cargo']}
-                Telefono   : {empleado['Telefono']}
-                Correo     : {empleado['Correo']}
-                Salario    : RD${empleado['Salario']:.2f}
-                =============================================
-                ''')
+                mostrar_empleado(i, empleado)
                 break
 
         if not encontrado:
@@ -307,18 +300,7 @@ def actualizar_empleado():
                 
                 encontrado = True
                 print('\nEmpleado encontrado.\n')
-                print(f'''
-                =============================================
-                {i + 1}   EMPLEADO
-                =============================================
-                Codigo     : {empleado['Codigo']}
-                Nombre     : {empleado['Nombre']}
-                Cargo      : {empleado['Cargo']}
-                Telefono   : {empleado['Telefono']}
-                Correo     : {empleado['Correo']}
-                Salario    : RD${empleado['Salario']:.2f}
-                =============================================
-                ''')
+                mostrar_empleado(i, empleado)
                 empleado['Cargo'] = obtener_cargo_empleado()
 
                 # ----------------------------------
@@ -384,18 +366,7 @@ def eliminar_empleado():
                 
                 encontrado = True
                 print('\nEmpleado encontrado.\n')
-                print(f'''
-                =============================================
-                {i + 1}   EMPLEADO
-                =============================================
-                Codigo     : {empleado['Codigo']}
-                Nombre     : {empleado['Nombre']}
-                Cargo      : {empleado['Cargo']}
-                Telefono   : {empleado['Telefono']}
-                Correo     : {empleado['Correo']}
-                Salario    : RD${empleado['Salario']:.2f}
-                =============================================
-                ''')
+                mostrar_empleado(i, empleado)
                 empleados.remove(empleado)
                 
                 guardar_empleados(empleados)
