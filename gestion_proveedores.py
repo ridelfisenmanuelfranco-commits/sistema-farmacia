@@ -176,14 +176,13 @@ def registrar_proveedor():
     proveedores.append(proveedor)
     guardar_proveedores(proveedores)
     print('\nProveedor agregado correctamente.\n')
-
+    
+    
 # ==============================================================================================
 #                                       MOSTRAR PROVEEDOR
 # ==============================================================================================
-def mostrar_proveedores():
-    if proveedores:
-        for  proveedor in proveedores:
-            print(f'''
+def mostrar_proveedor(proveedor):
+    print(f'''
             ========================================
                         PROVEEDOR
             ========================================
@@ -195,6 +194,16 @@ def mostrar_proveedores():
             Ciudad     : {proveedor['Ciudad']}
             ========================================
             ''')
+            
+
+
+# ==============================================================================================
+#                                       MOSTRAR PROVEEDORES
+# ==============================================================================================
+def mostrar_proveedores():
+    if proveedores:
+        for  proveedor in proveedores:
+            mostrar_proveedor(proveedor)
 
         print(f'\nTotal de proveedores: {len(proveedores)}\n')
 
@@ -214,18 +223,7 @@ def buscar_proveedor():
             if proveedor['Nombre'] == nombre_proveedor_buscado:
                 encontrado = True
                 print('\nProveedor encontrado.\n')
-                print(f'''
-                ========================================
-                            PROVEEDOR
-                ========================================
-                Codigo     : {proveedor['Codigo']}
-                Nombre     : {proveedor['Nombre']}
-                Telefono   : {proveedor['Telefono']}
-                Correo     : {proveedor['Correo']}
-                Direccion  : {proveedor['Direccion']}
-                Ciudad     : {proveedor['Ciudad']}
-                ========================================
-                ''')
+                mostrar_proveedor(proveedor)
                 break
 
         if not encontrado:
@@ -248,18 +246,7 @@ def actualizar_proveedor():
             if proveedor['Nombre'] == nombre_proveedor_buscado:
                 encontrado = True
                 print('\nProveedor encontrado.\n')
-                print(f'''
-                ========================================
-                            PROVEEDOR
-                ========================================
-                Codigo     : {proveedor['Codigo']}
-                Nombre     : {proveedor['Nombre']}
-                Telefono   : {proveedor['Telefono']}
-                Correo     : {proveedor['Correo']}
-                Direccion  : {proveedor['Direccion']}
-                Ciudad     : {proveedor['Ciudad']}
-                ========================================
-                ''')
+                mostrar_proveedor(proveedor)
 
                 # ----------------------------------
                 #         VERIFICAR TELEFONO
@@ -321,18 +308,7 @@ def eliminar_proveedor():
             if proveedor['Nombre'] == nombre_proveedor_buscado:
                 encontrado = True
                 print('\nProveedor encontrado.\n')
-                print(f'''
-                ========================================
-                            PROVEEDOR
-                ========================================
-                Codigo     : {proveedor['Codigo']}
-                Nombre     : {proveedor['Nombre']}
-                Telefono   : {proveedor['Telefono']}
-                Correo     : {proveedor['Correo']}
-                Direccion  : {proveedor['Direccion']}
-                Ciudad     : {proveedor['Ciudad']}
-                ========================================
-                ''')
+                mostrar_proveedor(proveedor)
 
                 proveedores.remove(proveedor)
                 guardar_proveedores(proveedores)
