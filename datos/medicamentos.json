@@ -28,5 +28,15 @@
         "Stock": 70,
         "Stock_Minimo": 10,
         "Proveedor": "Laboratorio Antillanos"
+    },
+    {
+        "Codigo": "MED-004",
+        "Nombre": "Paracetamol 500Mg",
+        "Categoria": "Analgésicos",
+        "Precio_Compra": 7.0,
+        "Precio_Venta": 14.0,
+        "Stock": 120,
+        "Stock_Minimo": 20,
+        "Proveedor": "Laboratorios Caribe"
     }
 ]

@@ -315,13 +315,12 @@ def registrar_medicamento():
     medicamentos.append(medicamento)
     guardar_medicamentos(medicamentos)
     print('\nMedicamento agregado correctamente.\n')
+    
 # =======================================================================================
-#                                   MOSTRAR MEDICAMENTOS
-# =======================================================================================
-def mostrar_medicamentos():
-    if medicamentos:
-        for medicamento in medicamentos:
-            print(f'''
+#                                   MOSTRAR MEDICAMENTO
+# =======================================================================================    
+def mostrar_medicamento(medicamento):
+    print(f'''
             ========================================
                         MEDICAMENTO
             ========================================
@@ -335,6 +334,15 @@ def mostrar_medicamentos():
             Proveedor       : {medicamento['Proveedor']}
             ========================================
             ''')
+    
+    
+# =======================================================================================
+#                                   MOSTRAR MEDICAMENTOS
+# =======================================================================================
+def mostrar_medicamentos():
+    if medicamentos:
+        for medicamento in medicamentos:
+            mostrar_medicamento(medicamento)
 
         print(f'\nTotal de medicamentos: {len(medicamentos)}\n')
 
@@ -356,20 +364,7 @@ def buscar_medicamento():
                 encontrado = True
                 print('\nMedicamento encontrado.\n')
 
-                print(f'''
-                ========================================
-                            MEDICAMENTO
-                ========================================
-                Codigo          : {medicamento['Codigo']}
-                Nombre          : {medicamento['Nombre']}
-                Categoria       : {medicamento['Categoria']}
-                Precio Compra   : RD${medicamento['Precio_Compra']:.2f}
-                Precio Venta    : RD${medicamento['Precio_Venta']:.2f}
-                Stock           : {medicamento['Stock']}
-                Stock Minimo    : {medicamento['Stock_Minimo']}
-                Proveedor       : {medicamento['Proveedor']}
-                ========================================
-                ''')
+                mostrar_medicamento(medicamento)
                 break
 
         if not encontrado:
@@ -391,20 +386,7 @@ def actualizar_medicamento():
             if medicamento['Nombre'] == nombre_medicamento_buscado:
                 encontrado = True
                 print('\nMedicamento encontrado.\n')
-                print(f'''
-                ========================================
-                            MEDICAMENTO
-                ========================================
-                Codigo          : {medicamento['Codigo']}
-                Nombre          : {medicamento['Nombre']}
-                Categoria       : {medicamento['Categoria']}
-                Precio Compra   : RD${medicamento['Precio_Compra']:.2f}
-                Precio Venta    : RD${medicamento['Precio_Venta']:.2f}
-                Stock           : {medicamento['Stock']}
-                Stock Minimo    : {medicamento['Stock_Minimo']}
-                Proveedor       : {medicamento['Proveedor']}
-                ========================================
-                ''')
+                mostrar_medicamento(medicamento)
 
                 medicamento['Categoria'] = obtener_categoria_medicamento()
                 medicamento['Precio_Compra'] = obtener_precio_compra_medicamento()
@@ -442,20 +424,7 @@ def eliminar_medicamento():
             if medicamento['Nombre'] == nombre_medicamento_buscado:
                 encontrado = True
                 print('\nMedicamento encontrado.\n')
-                print(f'''
-                ========================================
-                            MEDICAMENTO
-                ========================================
-                Codigo          : {medicamento['Codigo']}
-                Nombre          : {medicamento['Nombre']}
-                Categoria       : {medicamento['Categoria']}
-                Precio Compra   : RD${medicamento['Precio_Compra']:.2f}
-                Precio Venta    : RD${medicamento['Precio_Venta']:.2f}
-                Stock           : {medicamento['Stock']}
-                Stock Minimo    : {medicamento['Stock_Minimo']}
-                Proveedor       : {medicamento['Proveedor']}
-                ========================================
-                ''')
+                mostrar_medicamento(medicamento)
 
                 medicamentos.remove(medicamento)
                 guardar_medicamentos(medicamentos)
