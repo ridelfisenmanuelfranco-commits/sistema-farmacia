@@ -125,15 +125,11 @@ def registrar_cliente():
     guardar_clientes(clientes)
 
     print('\nCliente registrado exitosamente.\n')
-
-
 # =======================================================================================
-#                                    MOSTRAR CLIENTES     
+#                                    MOSTRAR CLIENTE   
 # =======================================================================================
-def mostrar_clientes():
-    if clientes:
-        for i, cliente in enumerate(clientes):
-            print(f'''
+def mostrar_cliente(i, cliente):
+    print(f'''
             =========================================
             {i+1}          CLIENTE
             =========================================
@@ -142,6 +138,13 @@ def mostrar_clientes():
             Telefono    : {cliente['Telefono']}
             =========================================
             ''')
+# =======================================================================================
+#                                    MOSTRAR CLIENTES     
+# =======================================================================================
+def mostrar_clientes():
+    if clientes:
+        for i, cliente in enumerate(clientes):
+            mostrar_cliente(i, cliente)
 
         print(f'\nTotal de clientes: {len(clientes)}\n')
         
@@ -164,15 +167,7 @@ def buscar_cliente():
             if cliente['Codigo'] == codigo_cliente_buscado:
                 encontrado = True
                 print('\nCliente encontrado.\n')
-                print(f'''
-                =========================================
-                {i+1}          CLIENTE
-                =========================================
-                Codigo      : {cliente['Codigo']}
-                Nombre      : {cliente['Nombre']}
-                Telefono    : {cliente['Telefono']}
-                =========================================
-                ''')
+                mostrar_cliente(i, cliente)
                 break
 
         if not encontrado:
@@ -197,15 +192,7 @@ def actualizar_cliente():
             if cliente['Codigo'] == codigo_cliente_buscado:
                 encontrado = True
                 print('\nCliente encontrado.\n')
-                print(f'''
-                =========================================
-                {i+1}          CLIENTE
-                =========================================
-                Codigo      : {cliente['Codigo']}
-                Nombre      : {cliente['Nombre']}
-                Telefono    : {cliente['Telefono']}
-                =========================================
-                ''')
+                mostrar_cliente(i, cliente)
 
                 cliente['Telefono'] = obtener_telefono_cliente()
 
@@ -235,15 +222,7 @@ def eliminar_cliente():
             if cliente['Codigo'] == codigo_cliente_buscado:
                 encontrado = True
                 print('\nCliente encontrado.\n')
-                print(f'''
-                =========================================
-                {i+1}          CLIENTE
-                =========================================
-                Codigo      : {cliente['Codigo']}
-                Nombre      : {cliente['Nombre']}
-                Telefono    : {cliente['Telefono']}
-                =========================================
-                ''')
+                mostrar_cliente(i, cliente)
 
                 clientes.remove(cliente)
                 
