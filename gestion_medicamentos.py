@@ -77,21 +77,27 @@ def obtener_codigo_medicamento():
 
     return codigo_medicamento
 
+# =======================================================================================
+#                                       OBTENER TEXTO
+# =======================================================================================
+def obtener_texto(prompt):
+    while True:
+        texto = input(prompt).strip().title()
+        
+        if texto == "Salir":
+            return None
+        
+        if texto == "":
+            print('\n[ El dato ingresado es incorrecto. ]\n')
+            continue
+    
+        return texto
 
 # =======================================================================================
 #                               OBTENER NOMBRE DEL MEDICAMENTO
 # =======================================================================================
 def obtener_nombre_medicamento():
-    while True:
-        nombre_medicamento = input('Nombre del medicamento: ').strip().title()
-        if nombre_medicamento == "Salir":
-            return None
-        
-        if nombre_medicamento == "":
-            print('\nNombre del medicamento incorrecto.\n')
-            continue
-
-        return nombre_medicamento
+    return obtener_texto('Ingrese el nombre del medicamento: ')
     
 
 # =======================================================================================
@@ -132,82 +138,70 @@ def obtener_categoria_medicamento():
         else:
             print('\nCategoria invalida.\n')
         
-
 # =======================================================================================
-#                          OBTENER PRECIO COMPRA DEL MEDICAMENTO
+#                                       OBTENER DECIMAL
 # =======================================================================================
-def obtener_precio_compra_medicamento():
+def obtener_decimal(prompt):
     while True:
         try:
-            precio_compra_medicamento = float(input('Precio compra del medicamento: '))
-
+            decimal = float(input(prompt))
         except ValueError:
             print('\nDato invalido.\n')
             continue
 
-        if precio_compra_medicamento <= 0:
-            print('\nPrecio del medicamento incorrecto.\n')
+        if decimal <= 0:
+            print('\n[ Valor ingresado invalido. ].\n')
             continue
-
-        return precio_compra_medicamento
+        
+        return decimal
+    
+    
+# =======================================================================================
+#                          OBTENER PRECIO COMPRA DEL MEDICAMENTO
+# =======================================================================================
+def obtener_precio_compra_medicamento():
+    return obtener_decimal('Precion de compra del medicamento: ')
     
 
 # =======================================================================================
 #                         OBTENER PRECIO DE VENTA DEL MEDICAMENTO
 # =======================================================================================
 def obtener_precio_venta_medicamento():
+    return obtener_decimal('Precion de venta del medicamento: ')
+
+    
+# =======================================================================================
+#                           OBTENER CANTIDAD ENTERA
+# =======================================================================================
+def obtener_entero(prompt):
     while True:
         try:
-            precio_venta_medicamento = float(input('Precio de venta del medicamento: '))
+            entero = int(input(prompt))
 
         except ValueError:
-            print('\nDato invalido.\n')
+            print('\n[ El valor ingresado es invalido. ]\n')
             continue
 
-        if precio_venta_medicamento <= 0:
-            print('\nPrecio de venta invalido.\n')
+        if entero <= 0:
+            print('\n[ El valor ingresado es invalido. ]\n')
             continue
 
-        return precio_venta_medicamento
+        return entero
     
-
+    
+    
 # =======================================================================================
 #                           OBTENER STOCK DEL MEDICAMENTO
 # =======================================================================================
 def obtener_stock_medicamento():
-    while True:
-        try:
-            stock_medicamento = int(input('Stock del medicamento: '))
-
-        except ValueError:
-            print('\nDato invalido.\n')
-            continue
-
-        if stock_medicamento <= 0:
-            print('\nStock del medicamento incorrecto.\n')
-            continue
-
-        return stock_medicamento
+    return obtener_entero('Ingrese el stock del medicamento: ')
     
 
 # =======================================================================================
 #                         OBTENER STOCK MINIMO DEL MEDICAMENTO
 # =======================================================================================
 def obtener_stock_minimo_medicamento():
-    while True:
-        try:
-            stock_minimo_medicamento = int(input('Stock minimo del medicamento: '))
-
-        except ValueError:
-            print('\nDato invalido.\n')
-            continue
-
-
-        if  stock_minimo_medicamento <= 0:
-            print('\nStock minimo incorrecto.\n')
-            continue
-
-        return stock_minimo_medicamento
+    return obtener_entero('Ingrese el stock minimo del medicamento: ')
     
 
 # =======================================================================================
@@ -348,93 +342,105 @@ def mostrar_medicamentos():
 
     else:
         print('\nNo hay medicamentos registrados.\n')
+        
+        
+# =======================================================================================
+#                                BUSCAR POR CODIGO                           
+# =======================================================================================
+def buscar_por_codigo(codigo):
+    for medicamento in medicamentos:
+        if medicamento['Codigo'] == codigo:
+            return medicamento
+            
+    return None
 
-
+        
 # =======================================================================================
 #                                BUSCAR MEDICAMENTO                          
 # =======================================================================================
 def buscar_medicamento():
-    if medicamentos:
-        encontrado = False
-
-        nombre_medicamento_buscado = obtener_nombre_medicamento()
-
-        for medicamento in medicamentos:
-            if medicamento['Nombre'] == nombre_medicamento_buscado:
-                encontrado = True
-                print('\nMedicamento encontrado.\n')
-
-                mostrar_medicamento(medicamento)
-                break
-
-        if not encontrado:
-            print('\nMedicamento no encontrado.\n')
-
+    codigo = input('Ingrese el codigo del medicamento a buscar: ').strip().upper()
+    medicamento = buscar_por_codigo(codigo)
+    
+    if medicamento:
+        mostrar_medicamento(medicamento)
+            
     else:
-        print('\nNo hay medicamentos registrados.\n')
+        print('\nMedicamento no existe.\n')
+        
 
 
 # =======================================================================================
 #                                   ACTUALIZAR MEDICAMENTOS
 # =======================================================================================
 def actualizar_medicamento():
-    if medicamentos:
-        encontrado = False
-        nombre_medicamento_buscado = obtener_nombre_medicamento()
-
-        for medicamento in medicamentos:
-            if medicamento['Nombre'] == nombre_medicamento_buscado:
-                encontrado = True
-                print('\nMedicamento encontrado.\n')
-                mostrar_medicamento(medicamento)
-
-                medicamento['Categoria'] = obtener_categoria_medicamento()
-                medicamento['Precio_Compra'] = obtener_precio_compra_medicamento()
-                medicamento['Precio_Venta'] = obtener_precio_venta_medicamento()
-                if medicamento['Precio_Venta'] <= medicamento['Precio_Compra']:
-                    print('\nPrecio de venta invalido.\n')
-                    return
-                
-                medicamento['Stock'] = obtener_stock_medicamento()
-                medicamento['Stock_Minimo'] = obtener_stock_minimo_medicamento()
-                if medicamento['Stock_Minimo'] > medicamento['Stock']:
-                    print('\nStock minimo no puede ser mayor al stock del medicamento.\n')
-                    return
-                
-                medicamento['Proveedor'] = obtener_proveedor_medicamento()
-                
-                guardar_medicamentos(medicamentos)
-                print('\nMedicamento actualizado correctamente.\n')
-                break
-        if not encontrado:
-            print('\nMedicamento no encontrado.\n')
+    codigo = input('Ingrese el codigo del medicamento a buscar: ').strip().upper()
+    
+    medicamento = buscar_por_codigo(codigo)
+    if medicamento:
+        print('\nMedicamento encontrado.\n')
+        mostrar_medicamento(medicamento)
+        medicamento['Categoria'] = obtener_categoria_medicamento()
+        medicamento['Precio_Compra'] = obtener_precio_compra_medicamento()
+        medicamento['Precio_Venta'] = obtener_precio_venta_medicamento()
+        if medicamento['Precio_Venta'] <= medicamento['Precio_Compra']:
+            print('\nPrecio de venta invalido.\n')
+            return
+        
+        medicamento['Stock'] = obtener_stock_medicamento()
+        medicamento['Stock_Minimo'] = obtener_stock_minimo_medicamento()
+        if medicamento['Stock_Minimo'] > medicamento['Stock']:
+            print('\nStock minimo no puede ser mayor al stock del medicamento.\n')
+            return
+        
+        medicamento['Proveedor'] = obtener_proveedor_medicamento()
+        
+        guardar_medicamentos(medicamentos)
+        print('\nMedicamento actualizado correctamente.\n')
+            
     else:
-        print('\nNo hay medicamentos registrados.\n')
+        print('\nMedicamento no encontrado.\n')
 
 
 # =======================================================================================
 #                              ELIMINAR MEDICAMENTO                    
 # =======================================================================================
 def eliminar_medicamento():
-    if medicamentos:
-        encontrado = False
-        nombre_medicamento_buscado = obtener_nombre_medicamento()
-
-        for medicamento in medicamentos:
-            if medicamento['Nombre'] == nombre_medicamento_buscado:
-                encontrado = True
-                print('\nMedicamento encontrado.\n')
-                mostrar_medicamento(medicamento)
-
-                medicamentos.remove(medicamento)
-                guardar_medicamentos(medicamentos)
-                print('\nMedicamento eliminado correctamente.\n')
-                break
-        if not encontrado:
-            print('\nMedicamento no encontrado.\n')
-
+    codigo = input('Ingrese el codigo del medicamento a buscar: ').strip().upper()
+    
+    medicamento = buscar_por_codigo(codigo)
+    if medicamento:
+        print('\nMedicamento encontrado.\n')
+        mostrar_medicamento(medicamento)
+        print('''
+        ========================================
+        [   ¿Decea eliminar el medicamento?    ]
+        ========================================
+        [1] Si
+        [2] No
+        ========================================
+        ''')
+        
+        try:
+            respuesta = int(input('Elija una opcion: '))
+        except ValueError:
+            print('\n[ Dato ingresado invalido. ]\n')
+            return
+        
+        if respuesta == 1:
+            medicamentos.remove(medicamento)
+            guardar_medicamentos(medicamentos)
+            print('\nMedicamento eliminado correctamente.\n')
+            return 
+        
+        elif respuesta == 2:
+            print('\n[ El medicamento no ha sido eliminado. ]\n')
+            return
+        else:
+            print('\n[ Opcion elegida invalida. ]\n')
+            
     else:
-        print('\nNo hay medicamentos registrados.\n')
+        print('\nMedicamento no existe.\n')
 
 # =======================================================================================
 #                               MENU DE MEDICAMENTOS
