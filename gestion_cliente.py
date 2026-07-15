@@ -38,22 +38,21 @@ def obtener_codigo_cliente():
     contador_clientes += 1
 
     return codigo_cliente
-
 # =======================================================================================
-#                                OBTENER NOMBRE DEL CLIENTE
+#                                OBTENER DATO
 # =======================================================================================
-def obtener_nombre_cliente():
+def obtener_texto(prompt):
     while True:
-        nombre_cliente = input('Nombre del cliente: ').strip().title()
+        dato = input(prompt).strip().title()
 
-        if nombre_cliente == 'Salir':
+        if dato == 'Salir':
             return None
         
-        if nombre_cliente == "":
-            print('\nNombre del cliente invalido.\n')
+        if dato == "":
+            print('\n[ Nombre del cliente invalido. ]\n')
             continue
 
-        return nombre_cliente
+        return dato
 
 # =======================================================================================
 #                               OBTENER TELEFONO DEL CLIENTE
@@ -64,15 +63,15 @@ def obtener_telefono_cliente():
         telefono_cliente = input('Telefono del cliente: ').strip()
 
         if not telefono_cliente.isdigit():
-            print('\nTelefono invalido.\n')
+            print('\n[ Telefono invalido. ]\n')
             continue
 
         if len(str(telefono_cliente)) != 10:
-            print('\nNumero de telefono invalido.\n')
+            print('\n[ Numero de telefono invalido. ]\n')
             continue
         
         if str(telefono_cliente)[:3] not in ['809', '829', '849']:
-            print('\nNumero de telefono invalido.\n')
+            print('\n[ Numero de telefono invalido. ]\n')
             continue
         
         telefono_cliente = f'({telefono_cliente[:3]}) {telefono_cliente[3:6]} {telefono_cliente[6:]}'
@@ -97,7 +96,8 @@ def registrar_cliente():
     existe = False
 
     codigo_cliente = obtener_codigo_cliente()
-    nombre_cliente = obtener_nombre_cliente()
+    nombre_cliente = obtener_texto('Ingrese el nombre del cliente: ')
+    
     if nombre_cliente is None:
         return
     
