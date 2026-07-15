@@ -151,30 +151,25 @@ def mostrar_clientes():
     else:
         print('\nNo hay clientes registrados')
 
-
+# =======================================================================================
+#                                    BUSCAR CLIENTES POR CODIGO 
+# =======================================================================================
+def buscar_cliente_por_codigo(codigo):
+    for i, cliente in enumerate(clientes):
+        if cliente['Codigo'] == codigo:
+            mostrar_cliente(i, cliente)
+            
+        return None, None
 # =======================================================================================
 #                                    BUSCAR CLIENTES      
 # =======================================================================================
 def buscar_cliente():
-    if clientes:
-        encontrado = False
-        codigo_cliente_buscado = input('Codigo del cliente: ').strip().upper()
-        if codigo_cliente_buscado == "":
-            print('\nCodigo cliente invalido.\n')
-            return
-        
-        for i, cliente in enumerate(clientes):
-            if cliente['Codigo'] == codigo_cliente_buscado:
-                encontrado = True
-                print('\nCliente encontrado.\n')
-                mostrar_cliente(i, cliente)
-                break
-
-        if not encontrado:
-            print('\nCliente no encontrado.\n')
-
-    else:
-        print('\nNo hay clientes registrados.\n')
+    codigo_cliente_buscado = input('Codigo del cliente: ').strip().upper()
+    i, cliente = buscar_cliente_por_codigo(codigo_cliente_buscado)
+    if cliente:
+        print('\n[ Cliente encontrado. ]\n')
+        mostrar_cliente(i, cliente)
+    
 
 # =======================================================================================
 #                                   ACTUALIZAR CLIENTES            
