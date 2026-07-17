@@ -179,29 +179,23 @@ def buscar_cliente():
 #                                   ACTUALIZAR CLIENTES            
 # =======================================================================================
 def actualizar_cliente():
-    if clientes:
-        encontrado = False
-        codigo_cliente_buscado = input('Codigo del cliente: ').strip().upper()
-
-        if codigo_cliente_buscado == "":
-            print('\nCodigo cliente invalido.\n')
-            return
+    codigo_cliente_buscado = input('Codigo del cliente: ').strip().upper()
+    i, cliente = buscar_por_codigo(codigo_cliente_buscado)
+    
+    if cliente:
+        mostrar_cliente(i, cliente)
         
-        for i, cliente in enumerate(clientes):
-            if cliente['Codigo'] == codigo_cliente_buscado:
-                encontrado = True
-                print('\nCliente encontrado.\n')
-                mostrar_cliente(i, cliente)
-
-                cliente['Telefono'] = obtener_telefono_cliente()
-
-                guardar_clientes(clientes)
-                print('\nCliente actualizado correctamente.\n')
-                break
-
-        if not encontrado:
-            print('\nCliente no encontrado.\n')
-
+        cliente['Telefono'] = obtener_telefono_cliente()
+        eliminar = input('Esta seguro que desea actualizar el cliente (si / no): ').strip().lower()
+        if eliminar == 'si':
+            guardar_clientes(clientes)
+            print('\nCliente actualizado correctamente.\n')
+            return
+        elif eliminar == 'no':
+            print('\n[ El cliente no ha sido eliminando. ]\n')
+            return 
+        else:
+            print('\n[ Opcion invalida. ]\n')
     else:
         print('\nNo hay clientes registrados.\n')
 
