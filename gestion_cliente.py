@@ -130,14 +130,14 @@ def registrar_cliente():
 # =======================================================================================
 def mostrar_cliente(i, cliente):
     print(f'''
-            =========================================
-            {i+1}          CLIENTE
-            =========================================
-            Codigo      : {cliente['Codigo']}
-            Nombre      : {cliente['Nombre']}
-            Telefono    : {cliente['Telefono']}
-            =========================================
-            ''')
+    =========================================
+    {i+1}          CLIENTE
+    =========================================
+    Codigo      : {cliente['Codigo']}
+    Nombre      : {cliente['Nombre']}
+    Telefono    : {cliente['Telefono']}
+    =========================================
+    ''')
 # =======================================================================================
 #                                    MOSTRAR CLIENTES     
 # =======================================================================================
@@ -154,21 +154,25 @@ def mostrar_clientes():
 # =======================================================================================
 #                                    BUSCAR CLIENTES POR CODIGO 
 # =======================================================================================
-def buscar_cliente_por_codigo(codigo):
+def buscar_por_codigo(codigo):
     for i, cliente in enumerate(clientes):
         if cliente['Codigo'] == codigo:
-            mostrar_cliente(i, cliente)
+            return i, cliente
             
-        return None, None
+    return None, None
+    
 # =======================================================================================
 #                                    BUSCAR CLIENTES      
 # =======================================================================================
 def buscar_cliente():
     codigo_cliente_buscado = input('Codigo del cliente: ').strip().upper()
-    i, cliente = buscar_cliente_por_codigo(codigo_cliente_buscado)
+    i, cliente = buscar_por_codigo(codigo_cliente_buscado)
+    
     if cliente:
-        print('\n[ Cliente encontrado. ]\n')
         mostrar_cliente(i, cliente)
+        
+    else:
+        print('\n[ Cliente no encontrado. ]\n')
     
 
 # =======================================================================================
