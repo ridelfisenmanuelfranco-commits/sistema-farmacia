@@ -186,13 +186,13 @@ def actualizar_cliente():
         mostrar_cliente(i, cliente)
         
         cliente['Telefono'] = obtener_telefono_cliente()
-        eliminar = input('Esta seguro que desea actualizar el cliente (si / no): ').strip().lower()
-        if eliminar == 'si':
+        actualizar = input('Esta seguro que desea actualizar el cliente (si / no): ').strip().lower()
+        if actualizar == 'si':
             guardar_clientes(clientes)
             print('\nCliente actualizado correctamente.\n')
             return
-        elif eliminar == 'no':
-            print('\n[ El cliente no ha sido eliminando. ]\n')
+        elif actualizar == 'no':
+            print('\n[ El cliente no ha sido actualizado. ]\n')
             return 
         else:
             print('\n[ Opcion invalida. ]\n')
@@ -203,31 +203,24 @@ def actualizar_cliente():
 #                                     ELIMINAR CLIENTE
 # =======================================================================================
 def eliminar_cliente():
-    if clientes:
-        encontrado = False
-        codigo_cliente_buscado = input('Codigo del cliente: ').strip().upper()
-
-        if codigo_cliente_buscado == "":
-            print('\nCodigo cliente invalido.\n')
+    codigo_cliente_buscado = input('Codigo del cliente: ').strip().upper()
+    i, cliente = buscar_por_codigo(codigo_cliente_buscado)
+    
+    if cliente:
+        print('\nCliente encontrado.\n')
+        mostrar_cliente(i, cliente)
+        eliminar = input('Esta seguro que desea eliminar el cliente (si / no): ').strip().lower()
+        if eliminar == 'si':
+            
+            clientes.remove(cliente)
+            guardar_clientes(clientes)
+            print('\nCliente eliminado correctamente.\n')
             return
-        
-        for i, cliente in enumerate(clientes):
-            if cliente['Codigo'] == codigo_cliente_buscado:
-                encontrado = True
-                print('\nCliente encontrado.\n')
-                mostrar_cliente(i, cliente)
-
-                clientes.remove(cliente)
-                
-                guardar_clientes(clientes)
-                print('\nCliente eliminado correctamente.\n')
-                break
-
-        if not encontrado:
-            print('\nCliente no encontrado.\n')
+        elif eliminar == 'no':
+            print('\n[ El cliente no ha sido eliminado. ]\n')
     
     else:
-        print('\nNo hay clientes registrados.\n')
+        print('\nCliente no encontrado.\n')
 
 # ==============================================================================================
 #                                       SISTEMA PRINCIPAL
