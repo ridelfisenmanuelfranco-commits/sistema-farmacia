@@ -42,22 +42,21 @@ def obtener_codigo_proveedor():
 
     return codigo_proveedor
 
-
 # ==============================================================================================
-#                                    OBTENER NOMBRE DE LA EMPRESA
+#                                    OBTENER DATOS
 # ==============================================================================================
-def obtener_nombre_empresa():
+def obtener_texto(prompt):
     while True:
-        nombre_empresa = input('Nombre de la empresa: ').strip().title()
-        if nombre_empresa == 'Salir':
-            return None
-        
-        if nombre_empresa == "":
-            print('\nNombre de la empresa invalido.\n')
-            continue
-
-        return nombre_empresa
+            dato = input(prompt).strip().title()
+            if dato == 'Salir':
+                return None
+            
+            if dato == "":
+                print('\n[ Dato invalido. ]\n')
+                continue
     
+            return dato
+        
 # ==============================================================================================
 #                                    OBTENER TELEFONO DE LA EMPRESA
 # ==============================================================================================
@@ -87,11 +86,7 @@ def obtener_telefono_empresa():
 # ==============================================================================================
 def obtener_correo_empresa():
     while True:
-        correo_empresa = input('Correo de la empresa: ').strip().lower()
-
-        if correo_empresa == "":
-            print('\nCorreo invalido.\n')
-            continue
+        correo_empresa = obtener_texto('Ingrese el correo de la empresa: ')
 
         if not ('@' in correo_empresa and '.' in correo_empresa):
             print('\nCorreo invalido.\n')
@@ -99,34 +94,6 @@ def obtener_correo_empresa():
             
         return correo_empresa
     
-# ==============================================================================================
-#                                  OBTENER DIRECCION DE LA EMPRESA
-# ==============================================================================================
-def obtener_direccion_empresa():
-    while True:
-        direccion_empresa = input('Direccion de la empresa: ').strip().title()
-
-        if direccion_empresa == "":
-            print('\nDireccion de empresa invalida.\n')
-            continue
-
-        return direccion_empresa
-    
-
-# ==============================================================================================
-#                                      OBTENER CIUDAD DE LA EMPRESA
-# ==============================================================================================
-def obtener_ciudad_empresa():
-    while True:
-        ciudad_empresa = input('Ciudad de la empresa: ').strip().title()
-
-        if ciudad_empresa == "":
-            print('\nNombre de la ciudad invalido.\n')
-            continue
-
-        return ciudad_empresa
-    
-
 # ==============================================================================================
 #                                        CREAR PROVEEDOR
 # ==============================================================================================
@@ -146,7 +113,7 @@ def crear_proveedor(codigo, nombre, telefono, correo, direccion, ciudad):
 def registrar_proveedor():
     existe = False
     codigo = obtener_codigo_proveedor()
-    nombre_empresa = obtener_nombre_empresa()
+    nombre_empresa = obtener_texto('Ingrese el nombre de la empresa: ')
 
     if nombre_empresa is None:
         return 
@@ -157,13 +124,13 @@ def registrar_proveedor():
             break
 
     if existe:
-        print('\nEl proveedor ya existe.\n')
+        print('\n[ El proveedor ya existe. ]\n')
         return
     
     telefono_empresa = obtener_telefono_empresa()
     correo_empresa = obtener_correo_empresa()
-    direccion_empresa = obtener_direccion_empresa()
-    ciudad_empresa = obtener_ciudad_empresa()
+    direccion_empresa = obtener_texto('ingrese la direccion de la empresa: ')
+    ciudad_empresa = obtener_texto('Ingrese la ciudad de la empresa: ')
 
     proveedor = crear_proveedor(codigo,
                                 nombre_empresa,
@@ -175,25 +142,26 @@ def registrar_proveedor():
 
     proveedores.append(proveedor)
     guardar_proveedores(proveedores)
-    print('\nProveedor agregado correctamente.\n')
+    print('\n[ Proveedor agregado correctamente. ]\n')
     
     
 # ==============================================================================================
 #                                       MOSTRAR PROVEEDOR
 # ==============================================================================================
-def mostrar_proveedor(proveedor):
+def mostrar_proveedor(i, proveedor):
     print(f'''
-            ========================================
-                        PROVEEDOR
-            ========================================
-            Codigo     : {proveedor['Codigo']}
-            Nombre     : {proveedor['Nombre']}
-            Telefono   : {proveedor['Telefono']}
-            Correo     : {proveedor['Correo']}
-            Direccion  : {proveedor['Direccion']}
-            Ciudad     : {proveedor['Ciudad']}
-            ========================================
-            ''')
+    {i + 1}
+    ========================================
+                PROVEEDOR
+    ========================================
+    Codigo     : {proveedor['Codigo']}
+    Nombre     : {proveedor['Nombre']}
+    Telefono   : {proveedor['Telefono']}
+    Correo     : {proveedor['Correo']}
+    Direccion  : {proveedor['Direccion']}
+    Ciudad     : {proveedor['Ciudad']}
+    ========================================
+    ''')
             
 
 
@@ -202,35 +170,36 @@ def mostrar_proveedor(proveedor):
 # ==============================================================================================
 def mostrar_proveedores():
     if proveedores:
-        for  proveedor in proveedores:
-            mostrar_proveedor(proveedor)
+        for i, proveedor in enumerate(proveedores):
+            mostrar_proveedor(i, proveedor)
 
-        print(f'\nTotal de proveedores: {len(proveedores)}\n')
+        print(f'\n[ Total de proveedores: {len(proveedores)} ]\n')
 
     else:
-        print('\nNo hay proveedores registrados.\n')
+        print('\n[ No hay proveedores registrados. ]\n')
 
+# ==============================================================================================
+#                                       BUSCAR POR CODIGO
+# ==============================================================================================
+def buscar_codigo(codigo):
+    for i, proveedor in enumerate(proveedores):
+        if proveedor['Codigo'] == codigo:
+            return i, proveedor
+        
+    return None, None
 
 # ==============================================================================================
 #                                       BUSCAR PROVEEDOR
 # ==============================================================================================
 def buscar_proveedor():
-    if proveedores:
-        encontrado = False
-        nombre_proveedor_buscado = obtener_nombre_empresa()
-
-        for proveedor in proveedores:
-            if proveedor['Nombre'] == nombre_proveedor_buscado:
-                encontrado = True
-                print('\nProveedor encontrado.\n')
-                mostrar_proveedor(proveedor)
-                break
-
-        if not encontrado:
-            print('\nProveedor no encontrado.\n')
-
+    codigo_proveedor_buscado = input('Ingrese el codigo de la empresa a buscar: ').strip().upper()
+    i, proveedor = buscar_codigo(codigo_proveedor_buscado)
+        
+    if proveedor:
+        mostrar_proveedor(i, proveedor)
+            
     else:
-        print('\nNo hay proveedores registrados.\n')
+        print('\n[ Proveedor no encontrado. ]\n')
 
 
 
@@ -238,88 +207,74 @@ def buscar_proveedor():
 #                                       ACTUALIZAR PROVEEDOR
 # ==============================================================================================
 def actualizar_proveedor():
-    if proveedores:
-        encontrado = False
-        nombre_proveedor_buscado = obtener_nombre_empresa()
+    codigo_proveedor_buscado = input('Ingrese el codigo de la empresa a buscar: ').strip().upper()
+    i, proveedor = buscar_codigo(codigo_proveedor_buscado)
+    if proveedor:
+        mostrar_proveedor(i, proveedor)
 
-        for proveedor in proveedores:
-            if proveedor['Nombre'] == nombre_proveedor_buscado:
-                encontrado = True
-                print('\nProveedor encontrado.\n')
-                mostrar_proveedor(proveedor)
+        # ----------------------------------
+        #         VERIFICAR TELEFONO
+        # ----------------------------------
+        nuevo_telefono = obtener_telefono_empresa()
 
-                # ----------------------------------
-                #         VERIFICAR TELEFONO
-                # ----------------------------------
-                nuevo_telefono = obtener_telefono_empresa()
-
-                proveedor_existe = False
-                for otro_proveedor in proveedores:
-                    if (otro_proveedor['Codigo'] != proveedor['Codigo'] 
-                        and otro_proveedor['Telefono'] == nuevo_telefono):
-                        proveedor_existe = True
-                        break
-                if proveedor_existe:
-                    print('\nEl proveedor ya existe.\n')
-                    return
-            
-                proveedor['Telefono'] = nuevo_telefono
-
-
-                # ----------------------------------
-                #         VERIFICAR CORREO
-                # ----------------------------------
-                nuevo_correo = obtener_correo_empresa()
-                correo_existe = False
-                for otro_proveedor in proveedores:
-                    if (otro_proveedor['Codigo'] != proveedor['Codigo'] 
-                        and otro_proveedor['Correo'] == nuevo_correo):
-                        correo_existe = True
-                        break
-
-                if correo_existe:
-                    print('\nEl correo ya existe.\n')
-                    return
-                
-                proveedor['Correo'] = nuevo_correo
-
-                proveedor['Direccion'] = obtener_direccion_empresa()
-                proveedor['Ciudad'] = obtener_ciudad_empresa()
-
-                guardar_proveedores(proveedores)
-                print('\nProveedor actualizado correctamente.\n')
+        proveedor_existe = False
+        for otro_proveedor in proveedores:
+            if (otro_proveedor['Codigo'] != proveedor['Codigo'] 
+                and otro_proveedor['Telefono'] == nuevo_telefono):
+                proveedor_existe = True
                 break
-        if not encontrado:
-            print('\nProveedor no encontrado.\n')
+            if proveedor_existe:
+                print('\n[ El proveedor ya existe. ]\n')
+                return
+            
+            proveedor['Telefono'] = nuevo_telefono
 
+
+            # ----------------------------------
+            #         VERIFICAR CORREO
+            # ----------------------------------
+            nuevo_correo = obtener_correo_empresa()
+            correo_existe = False
+            for otro_proveedor in proveedores:
+                if (otro_proveedor['Codigo'] != proveedor['Codigo'] 
+                    and otro_proveedor['Correo'] == nuevo_correo):
+                    correo_existe = True
+                    break
+            if correo_existe:
+                print('\n[ El correo ya existe. ]\n')
+                return
+            
+            proveedor['Correo'] = nuevo_correo
+            proveedor['Direccion'] = obtener_texto('Ingrese la direccion de la empresa: ')
+            proveedor['Ciudad'] = obtener_texto('Ingrese la ciudad de la empresa: ')
+            guardar_proveedores(proveedores)
+            print('\n[ Proveedor actualizado correctamente. ]\n')
+            break
     else:
-        print('\nNo hay proveedores registrados.\n')
+        print('\n[ No hay proveedores registrados. ]\n')
 
 
 # ==============================================================================================
 #                                       ELIMINAR PROVEEDOR
 # ==============================================================================================
 def eliminar_proveedor():
-    if proveedores:
-        encontrado = False
-        nombre_proveedor_buscado = obtener_nombre_empresa()
+    codigo_proveedor_buscado = input('Ingrese el codigo de la empresa a buscar: ').strip().upper()
+    i, proveedor = buscar_codigo(codigo_proveedor_buscado)
+    if proveedor:
+        mostrar_proveedor(i, proveedor)
+        
+        eliminar = input('Desea eliminar este proveedor: ').strip().lower()
+        if eliminar == 'si':
+            proveedores.remove(proveedor)
+            guardar_proveedores(proveedores)
+            print('\n[ Proveedor eliminado correctamente. ]\n')
+            
+        else:
+            print('\n[ El proveedor no ha sido eliminado. ]\n')
 
-        for proveedor in proveedores:
-            if proveedor['Nombre'] == nombre_proveedor_buscado:
-                encontrado = True
-                print('\nProveedor encontrado.\n')
-                mostrar_proveedor(proveedor)
-
-                proveedores.remove(proveedor)
-                guardar_proveedores(proveedores)
-                print('\nProveedor eliminado correctamente.\n')
-                break
-                
-        if not encontrado:
-            print('\nProveedor no encontrado.\n')
     
     else:
-        print('\nNo hay proveedores registrados.\n')
+        print('\n[ No hay proveedores registrados. ]\n')
 
 
 # ==============================================================================================
@@ -333,7 +288,7 @@ def menu_proveedores():
             opcion = int(input('Elije una opcion: '))
 
         except ValueError:
-            print('\nDato invalido.\n')
+            print('\n[ Dato invalido. ]\n')
             continue
         
         limpiar_consola()
@@ -354,7 +309,7 @@ def menu_proveedores():
             eliminar_proveedor()
 
         elif opcion == 6:
-            print('\nVolviendo al menu principal.\n')
+            print('\n[ Volviendo al menu principal. ]\n')
             break
         else:
-            print('\nOpcion invalida.\n')
+            print('\n [ Opcion invalida. ]\n')
