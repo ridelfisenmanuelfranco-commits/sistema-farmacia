@@ -290,18 +290,17 @@ def actualizar_empleado():
     if empleados:
         encontrado = False
         codigo_empleado_buscado = input('Codigo del empleado: ').strip().upper()
+
         if codigo_empleado_buscado == "":
             print('\nCodigo invalido.\n')
             return
         
         for i, empleado in enumerate(empleados):
-
             if empleado['Codigo'] == codigo_empleado_buscado:
                 
                 encontrado = True
                 print('\nEmpleado encontrado.\n')
                 mostrar_empleado(i, empleado)
-                empleado['Cargo'] = obtener_cargo_empleado()
 
                 # ----------------------------------
                 #         VERIFICAR TELEFONO
@@ -310,31 +309,33 @@ def actualizar_empleado():
 
                 telefono_existe = False
                 for otro_empleado in empleados:
-                    if (otro_empleado['Codigo'] != empleado['Codigo'] 
-                        and otro_empleado['Telefono'] == empleado['Telefono']):
+                    if (otro_empleado['Codigo'] != codigo_empleado_buscado
+                        and otro_empleado['Telefono'] == nuevo_telefono):
                         telefono_existe = True
                         break
                 if telefono_existe:
                     print('\nEl telefono ya existe.\n')
                     return
                 
-                empleado['Telefono'] = nuevo_telefono
                 # ----------------------------------
                 #         VERIFICAR CORREO
                 # ----------------------------------
                 nuevo_correo = obtener_correo_empleado()
                 correo_existe = False
                 for otro_empleado in empleados:
-                    if (otro_empleado['Codigo'] != empleado['Codigo'] 
-                        and otro_empleado['Correo'] == empleado['Correo']):
+                    if (otro_empleado['Codigo'] !=  codigo_empleado_buscado
+                        and otro_empleado['Correo'] == nuevo_correo):
                         correo_existe = True
                         break
 
                 if correo_existe:
                     print('\nEl correo ya existe.\n')
                     return
+
                 
-                empleado['Correo'] = obtener_correo_empleado()
+                empleado['Cargo'] = obtener_cargo_empleado()
+                empleado['Telefono'] = nuevo_telefono
+                empleado['Correo'] = nuevo_correo
                 empleado['Salario'] = obtener_salario_empleado()
 
                 guardar_empleados(empleados)
