@@ -57,20 +57,20 @@ def obtener_codigo_empleado():
     return codigo_empleado
 
 # ================================================================================================
-#                               OBTENER NOMBRE DEL EMPLEADO        
+#                               OBTENER TEXTO       
 # ================================================================================================
-def obtener_nombre_empleado():
+def obtener_texto(prompt):
     while True:
-        nombre_empleado = input('Nombre empleado: ').strip().title()
+        dato = input(prompt).strip().title()
 
-        if nombre_empleado == 'Salir':
+        if dato == 'Salir':
             return None
         
-        if nombre_empleado == "":
+        if dato == "":
             print('\nNombre del empleado invalido.\n')
             continue
 
-        return nombre_empleado
+        return dato
     
 # ================================================================================================
 #                                       OBTENER CARGO DEL EMPLEADO
@@ -122,7 +122,7 @@ def obtener_telefono_empleado():
             print('\nNumero de telefono invalido.\n')
             continue
         
-        telefono_empleado = f'({telefono_empleado[:3]}) {telefono_empleado[3:6]} {telefono_empleado[6:]}'
+        telefono_empleado = f'({telefono_empleado[:3]})-{telefono_empleado[3:6]}-{telefono_empleado[6:]}'
         return telefono_empleado
     
 
@@ -131,11 +131,7 @@ def obtener_telefono_empleado():
 # ================================================================================================
 def obtener_correo_empleado():
     while True:
-        correo_empleado = input('Correo del empleado: ').strip().lower()
-
-        if correo_empleado == "":
-            print('\nCorreo empleado incorrecto.\n')
-            continue
+        correo_empleado = obtener_texto('Ingrese su correo: ').lower()
 
         if not ('@' in correo_empleado and '.' in correo_empleado):
             print('\nCorreo invalido.\n')
@@ -185,7 +181,7 @@ def crear_empleado(codigo_empleado, nombre_empleado, cargo_empleado, telefono_em
 def registrar_empleado():
     existe = False
     codigo_empleado = obtener_codigo_empleado()
-    nombre_empleado = obtener_nombre_empleado()
+    nombre_empleado = obtener_texto('Ingrese su nombre: ')
 
     if nombre_empleado is None:
         return
