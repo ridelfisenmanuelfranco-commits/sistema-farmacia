@@ -14,5 +14,13 @@
         "Telefono": "(829) 222 2222",
         "Correo": "laura@farmacia.com",
         "Salario": 25000.0
+    },
+    {
+        "Codigo": "EMP-004",
+        "Nombre": "Carlos Alberto Gomez",
+        "Cargo": "Farmacéutico",
+        "Telefono": "(809) 555 1003",
+        "Correo": "carlos.alberto@farmaciasalud.com",
+        "Salario": 48500.0
     }
 ]
